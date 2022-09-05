@@ -4,6 +4,11 @@ pipeline {
     registry = "ishwary/devops"
     registryCredential = 'dockerhub'
     dockerImage = ""
+    export PROJECT='nomadic-device-361610'
+    export CLUSTER='autopilot-cluster-1'
+    export REGION='us-central1'
+    export SA="my-service-account"
+    export SA_EMAIL=${SA}@${PROJECT}.iam.gserviceaccount.com
   }
 
   agent any
@@ -37,7 +42,7 @@ pipeline {
     stage('Deploy to GKE') {
       steps {
          sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' myweb.yaml"
-        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: autopilot-cluster-1, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       }
     }
 
