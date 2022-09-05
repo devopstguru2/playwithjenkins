@@ -2,6 +2,7 @@ pipeline {
 
   environment {
     registry = "hub.docker.com/repository/docker/ishwary/devopstest"
+    registryCredential = 'dockerhub'
     dockerImage = ""
   }
 
@@ -26,7 +27,7 @@ pipeline {
     stage('Push Image') {
       steps{
         script {
-          docker.withRegistry( "" ) {
+          docker.withRegistry( "", registryCredential) {
             dockerImage.push()
           }
         }
