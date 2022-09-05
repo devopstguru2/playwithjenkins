@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    registry = "https://registry.hub.docker.com/ishwary/devops"
+    registry = "registry.hub.docker.com/ishwary/devops"
     registryCredential = 'dockerhub'
     dockerImage = ""
   }
