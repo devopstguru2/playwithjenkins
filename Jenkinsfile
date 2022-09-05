@@ -8,7 +8,7 @@ pipeline {
     export CLUSTER='autopilot-cluster-1'
     export REGION='us-central1'
     export SA="my-service-account"
-    export SA_EMAIL=${SA}@${PROJECT}.iam.gserviceaccount.com
+    export SA_EMAIL='${SA}@${PROJECT}.iam.gserviceaccount.com'
   }
 
   agent any
