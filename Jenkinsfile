@@ -34,11 +34,10 @@ pipeline {
       }
     }
 
-    stage('Deploy App') {
+    stage('Deploy to GKE') {
       steps {
-        script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "kube-creds-dev")
-        }
+         sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' myweb.yaml"
+        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: autopilot-cluster-1, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       }
     }
 
