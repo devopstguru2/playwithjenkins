@@ -39,7 +39,7 @@ pipeline {
       steps {
          sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' myweb.yaml"
          
-        step([$class: 'KubernetesEngineBuilder', projectId: "nomadic-device-361610", clusterName: 'autopilot-cluster-1', region: 'us-central1', manifestPattern: 'myweb.yaml', credentialsId: gke, verifyDeployments: true])
+        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION, manifestPattern: 'myweb.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       }
     }
 
