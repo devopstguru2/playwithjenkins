@@ -37,7 +37,7 @@ pipeline {
 
     stage('Deploy to GKE') {
       steps {
-         sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' myweb.yaml"
+         sh "sed -i 's/imgTag/dockerImage:${env.BUILD_ID}/g' myweb.yaml"
          
         step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION, manifestPattern: 'myweb.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       }
