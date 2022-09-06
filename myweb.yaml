@@ -16,9 +16,11 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: 192.168.1.81:5000/justme/myweb:1
+      - image: imgTag
         imagePullPolicy: Always
         name: myweb
+      imagePullSecrets:
+      - name: regcred
 
 ---
 apiVersion: v1
