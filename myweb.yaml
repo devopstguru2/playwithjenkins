@@ -16,7 +16,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: imgTag
+      - image: ishwary/devops:latest
         imagePullPolicy: Always
         name: myweb
       imagePullSecrets:
